@@ -1,0 +1,29 @@
+@using Atividade2.Models
+@model Item
+
+<h1 class="display-4 text-center">Inserir Item no Pedido #@Model.itemPedido</h1>
+
+<form asp-action="IncluirItem" method="POST">
+    <input style="display: none;" asp-for="itemPedido">
+    <div class="form-group">
+        <p>
+            <label asp-for="Descrição">Descrição</label>
+            <input class="form-control" asp-for="Descrição">
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label asp-for="Quantidade">Quantidade</label>
+            <input class="form-control" asp-for="Quantidade">
+        </p>
+    </div>
+    <div class="form-group">
+        <p>
+            <label asp-for="Valor">Valor</label>
+            <input class="form-control" asp-for="Valor">
+        </p>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Adicionar">
+
+</form>

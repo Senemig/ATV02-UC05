@@ -1,0 +1,28 @@
+﻿@using Atividade2.Models
+@model List<Pedido>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="display-1 text-center">Restaurante 2.0</h1>
+<table class="table text-center table-bordered table-hover" style="cursor: pointer;">
+    <thead class="thead-dark">
+        <th scope="col">N&deg; Pedido</th>
+        <th scope="col">Qtd Itens</th>
+        <th scope="col">Valor Total</th>
+    </thead>
+    <tbody>
+@for (int i = 0; i < Model.Count(); i++)
+{
+                <tr onclick="location.href='@Url.Action("ExibirPedido", "Pedido", new {i = i})'">
+                    <th scope="row">@(i+1)</th>
+                    <td>@Model[i].QtdItens</td>
+                    <td>R$@String.Format("{0:N2}" ,Model[i].ValorTotal)</td>
+                </tr>
+}
+    </tbody>
+</table>
+<form asp-action="CriarPedido" method="POST">
+    <input class="btn btn-primary" type="submit" value="Criar Novo Pedido">
+</form>

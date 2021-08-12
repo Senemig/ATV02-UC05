@@ -1,0 +1,33 @@
+@using Atividade2.Models;
+@model Pedido;
+
+
+<h1 class="display-3 text-center">Pedido #@(Model.nPedido +1)</h1>
+<table class="table text-center table-bordered">
+    <thead class="thead-dark">
+        <th scope="col">N&deg; Item</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Valor Unitário</th>
+        <th scope="col">Valor Total</th>
+        <th scope="col">Remover</th>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.ListaItens.Count(); i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                <td>@Model.ListaItens[i].Descrição</td>
+                <td>@Model.ListaItens[i].Quantidade</td>
+                <td>R$@String.Format("{0:N2}", Model.ListaItens[i].Valor)</td>
+                <td>R$@String.Format("{0:N2}", (Model.ListaItens[i].Valor * Model.ListaItens[i].Quantidade))</td>
+                <td><a onclick="location.href='@Url.Action("RemoverItem", "Pedido", new {p = Model.nPedido, i = i})'"
+                    style="cursor: pointer;"><strong>X</strong></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" onclick="location.href='@Url.Action("CadastrarItem", "Pedido", new{i = Model.nPedido})'">Adicionar item</button>
+<button class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "Home")'">Voltar</button>
+<button class="btn btn-danger float-right" onclick="location.href='@Url.Action("FinalizarPedido", "Pedido", new{p = Model.nPedido})'">Finalizar
+    Pedido</button>
